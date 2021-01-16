@@ -1,6 +1,7 @@
  A simple project built with .Net Core Web MVC to search GitHub's API for repositories
  by entering a search text. A user can then bookmark selected repos.This is just a demo project
- that saves bookmarks to the users cache.
+ that saves bookmarks to the users web session.
+ 
  To Run: download project and execute its a self-contained project that needs no external 
  dependencied other than  an iis server.(or similar).
  
