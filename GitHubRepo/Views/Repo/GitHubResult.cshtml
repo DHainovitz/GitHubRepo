@@ -1,0 +1,90 @@
+﻿
+@model IEnumerable<GitHubRepo.Models.Repo>
+
+
+
+
+@{
+}
+<div class="text-center">
+    <div class="container-fluid mt-4">
+        <div class="row justify-content-start">
+
+
+            @if (Model == null || Model.Count() == 0)
+            {
+
+                <div class="jumbotron">
+                    <h1><i class="fa fa-camera-retro" aria-hidden="true"></i> There are no results to display</h1>
+                    <p>Enter in the above search box the repository you are looking for.</p>
+                    <p>You can bookmark any repository you like.</p>
+
+                </div>
+            }
+
+            else {
+            @foreach (GitHubRepo.Models.Repo r in Model)
+            {
+                <div class="col-auto mb-3">
+                    <div class="card" style="width: 15rem;">
+                        <img class="card-img-top align-self-center" src="@r.AvatarURL." alt="avatar" style="width: 5rem; height: 5rem" />
+                        <div class="card-body">
+
+                            <p class="card-text">Repo Name: @r.RepoName</p>
+                            <button class="btn repoBtn btn-primary rounded-0" name="@r.RepoId">BookMark Repo</button>
+
+
+                        </div>
+                    </div>
+                </div>
+            }
+            }
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+
+
+        $(document).ready(function () {
+
+           // alert("works!");
+
+            $(".repoBtn").click(function (e) {
+
+               // alert("works!");
+                e.preventDefault(); //prevent default form submit
+
+
+
+                    var Name = $(this).attr('name');
+                    //$(selector).attr(attribute)
+                    //alert(Name);
+
+                    $.ajax({
+                        url: '/Repo/SaveBM/',        //ControllerName/ActionName/
+                        data: {
+                            Name: Name
+                        },
+                        success: function (data) {
+                            showMsg(data);
+                        },
+                        cache: false
+                    });
+              
+
+
+            });
+
+            function showMsg(data) {
+                alert("Bookmark was added to list");
+            }
+
+
+
+        });
+    </script>
+    }
